@@ -14,21 +14,6 @@ An Android application for converting an amount entered in **USD, EUR, MXN or AR
 - Clearly distinguishes ARS reference prices from Argentine blue-dollar and MEP quotations.
 - No account, analytics, ads, geolocation or special permissions. Only internet access.
 
-## Build an APK without installing Android Studio (GitHub Actions)
-
-1. Create a new GitHub repository and upload the **contents of this folder**, including `.github/workflows/android-apk.yml`. (Do not upload the outer ZIP as one file.)
-2. Go to **Actions > Build Android APK > Run workflow**.
-3. After the job completes successfully, download the **Crossrate-debug-apk** artifact.
-4. Unzip the artifact. Copy `app-debug.apk` to your Android phone and open it to install. Android will ask you to permit app installs from that file manager/browser. Review the permission prompt before proceeding.
-
-This generates a **debug build** suitable for your own device. Publishing to Google Play requires a signed release and store compliance checks.
-
-## Build with Android Studio
-
-Install Android Studio (JDK 17), Gradle 8.13, and Android SDK 36. Open this folder as a Gradle project and build the `app` module. The project intentionally does not contain a Gradle Wrapper JAR because it could not be fetched or authenticated in the authoring environment. Select your locally installed Gradle 8.13 in Android Studio settings, or run `gradle wrapper --gradle-version 8.13` once using your installed Gradle, which generates standard wrapper files. Then run `./gradlew assembleDebug` (or `gradlew.bat assembleDebug` on Windows).
-
-Result: `app/build/outputs/apk/debug/app-debug.apk`.
-
 ## Important distinction for Argentina
 
 Frankfurter delivers *blended mid-market reference rates* once per day, not local informal cash rates (dólar blue), MEP brokerage rates, or your card issuer's settlement rate. All displayed conversions are estimates. Rates can be dated differently for different currencies, so the application reports the date range when appropriate. Rates do not update tick by tick.
@@ -53,7 +38,3 @@ No downloaded rate means no displayed conversion. A failed refresh leaves the la
 - Source code: `app/src/main/java/com/crossrate/travel/`
 - Tests: `app/src/test/java/com/crossrate/travel/FxMathTest.kt`
 - CI: `.github/workflows/android-apk.yml`
-
-## If you're evaluating the ZIP before installation
-
-`preview.html` is a companion browser prototype with the same core currency workflow. It isn't the Android APK, and it needs an online connection for its initial rate load.
